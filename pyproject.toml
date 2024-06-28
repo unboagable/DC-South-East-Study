@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "anacostia-warning-system"
+version = "0.1.0"
+description = "Anacostia DC Air pollution and water warning system."
+authors = ["Your Name <your@email.com>"]
+readme = "README.md"
+packages = [{ include = "src/*.py" }]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+numpy = "*"
+pandas = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
