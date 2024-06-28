@@ -1,46 +1,51 @@
-# anacostia-warning-system
-Anacostia DC Air pollution and water warning system
+# Anacostia Warning System
 
+Anacostia DC Air pollution and water warning system
 
 ## Getting Started
 
 ### Installing pipx
-https://pipx.pypa.io/stable/installation/
 
-#### On macOS:
+Install pipx using Homebrew on macOS:
 
-```
+```bash
 brew install pipx
-
 pipx ensurepath
-
 sudo pipx ensurepath --global
 ```
 
-optional to allow pipx actions in global scope. See "Global installation" section below.
+Install pipx via Scoop on Windows:
 
-
-#### On Windows:
-Install via Scoop:
-
-```
+```bash
 scoop install pipx
-
 pipx ensurepath
 ```
 
-### Installing poetry
-```pipx install poetry```
+### Installing Poetry
+
+Install Poetry using pipx:
+
+```bash
+pipx install poetry
+```
 
 ### Installing Dependencies
 
-```
-poetry lock --no-update
+Lock dependencies and install them with Poetry:
 
+```bash
+poetry lock --no-update
 poetry install
 ```
 
-### Running application
-```
+### Running the Application
+
+Execute the application using Poetry:
+
+```bash
 poetry run python src/start.py
 ```
+
+## Running Using Notebooks
+
+In the `notebooks` directory, create `.ipynb` files that can utilize `requirements.txt` to install dependencies.
