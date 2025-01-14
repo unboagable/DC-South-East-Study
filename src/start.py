@@ -1,7 +1,7 @@
 import pandas as pd
 
 FILENAME = 'data/EJSCREEN_2024_BG_StatePct_with_AS_CNMI_GU_VI.csv'
-data = pd.read_csv(FILENAME, index_col=0, encoding='utf-8')
+df = pd.read_csv(FILENAME, index_col=0, encoding='utf-8')
 
 # Programmatically Identify Relevant Columns
 def identify_columns(data):
@@ -9,15 +9,12 @@ def identify_columns(data):
     for col in data.columns:
         print(col)
 
-if data is not None:
-    identify_columns(data)
+if df is not None:
+    identify_columns(df)
 
-# Filter for Washington, DC and then for Anacostia
-def filter_anacostia(data, keyword="Anacostia"):
-    # Step 1: Filter for DC
-    dc_data = data[data['ST_ABBREV'] == 'DC']
-    print(f"Filtered data for Washington, DC: {dc_data.shape[0]} rows")
+# Filter rows where 'ST_ABBREV' == 'DC'
+dc_filtered_df = df[df['ST_ABBREV'] == 'DC']
 
-# Filter for Anacostia
-if data is not None:
-    anacostia_data = filter_anacostia(data, 'Anacostia')
+# Save the filtered data to a new CSV file
+output_file_path = 'data/DC-filtered_EJSCREEN_2024_BG_StatePct_with_AS_CNMI_GU_VI.csv'  # Output file path
+dc_filtered_df.to_csv(output_file_path, index=False)
