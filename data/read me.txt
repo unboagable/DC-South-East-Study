@@ -1,0 +1,11 @@
+Download from here
+
+https://gaftp.epa.gov/EJScreen/2024/2.31_August_useMe/EJScreen_2024_BG_StatePct_with_AS_CNMI_GU_VI.csv.zip
+
+Or latest csv
+
+https://www.epa.gov/ejscreen/download-ejscreen-data
+-CSV file (State Level)
+
+
+
