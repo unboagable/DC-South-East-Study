@@ -1,6 +1,6 @@
 import pandas as pd
 
-FILENAME = 'data/EJSCREEN_2024_BG_StatePct_with_AS_CNMI_GU_VI.csv'
+FILENAME = 'data/EJScreen_2024_Tract_StatePct_with_AS_CNMI_GU_VI.csv'
 df = pd.read_csv(FILENAME, index_col=0, encoding='utf-8')
 
 # Programmatically Identify Relevant Columns
@@ -16,5 +16,5 @@ if df is not None:
 dc_filtered_df = df[df['ST_ABBREV'] == 'DC']
 
 # Save the filtered data to a new CSV file
-output_file_path = 'data/DC-filtered_EJSCREEN_2024_BG_StatePct_with_AS_CNMI_GU_VI.csv'  # Output file path
+output_file_path = 'data/DC-filtered_EJScreen_2024_Tract_StatePct_with_AS_CNMI_GU_VI.csv'  # Output file path
 dc_filtered_df.to_csv(output_file_path, index=False)
