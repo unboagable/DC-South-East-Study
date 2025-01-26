@@ -53,6 +53,21 @@ if response.status_code == 200:
     life_expectancy = extras.get("RAW_HI_LIFEEXP", "N/A")
     print(f"\nHealth Indicator - Life Expectancy: {life_expectancy} years")
 
+    # Flatten the data into a single dictionary
+    flattened_data = {**demographics, **main_stats, **extras}
+
+    # Create a DataFrame from the flattened data
+    df = pd.DataFrame([flattened_data])
+
+    # Display the DataFrame
+    print("DataFrame:")
+    print(df)
+
+    # Optionally save the DataFrame to a CSV file
+    # df.to_csv("ejscreen_data.csv", index=False)
+
+    print(df.describe())
+
 else:
     print(f"Error: {response.status_code}")
 
