@@ -19,18 +19,7 @@ block_groups_anacostia = [
     "110010082011", "110010082012", "110010082021", "110010082022"
 ]
 
-# Function to fetch data for a single block group
-def get_ejscreen_data(area_id):
-    params = {
-        "namestr": area_id,
-        "geometry": "",
-        "distance": "",
-        "unit": "9035",
-        "areatype": "blockgroup",
-        "areaid": area_id,
-        "f": "json"
-    }
-    
+def get_ejscreen_data(params, area_id=None):
     response = requests.get(url, params=params)
     
     if response.status_code == 200:
@@ -43,7 +32,7 @@ def get_ejscreen_data(area_id):
 
         # Flatten the data
         flattened_data = {
-            "area_id": area_id,
+            "area_id": area_id,  # Add area_id for tracking
             "total_population": demographics.get("TOTALPOP"),
             "percent_minority": demographics.get("PCT_MINORITY"),
             "per_capita_income": demographics.get("PER_CAP_INC"),
@@ -59,10 +48,34 @@ def get_ejscreen_data(area_id):
         print(f"Error fetching data for {area_id}: {response.status_code}")
         return None
 
+def get_ejscreen_data_city(city, area_id):
+    params = {
+        "namestr": city,
+        "geometry": "",
+        "distance": "",
+        "unit": "9035",
+        "areatype": "city",
+        "areaid": area_id,
+        "f": "json"
+    }
+    return get_ejscreen_data(params, area_id=area_id)
+        
+def get_ejscreen_data_bg(area_id):
+    params = {
+        "namestr": area_id,
+        "geometry": "",
+        "distance": "",
+        "unit": "9035",
+        "areatype": "blockgroup",
+        "areaid": area_id,
+        "f": "json"
+    }
+    return get_ejscreen_data(params, area_id=area_id)
+
 # Get data for all block groups southeast of Anacostia
 data_anacostia = []
 for bg in block_groups_anacostia:
-    result = get_ejscreen_data(bg)
+    result = get_ejscreen_data_bg(bg)  # Fixed function call
     if result:
         data_anacostia.append(result)
     time.sleep(1)  # Avoid overwhelming the API
@@ -70,25 +83,11 @@ for bg in block_groups_anacostia:
 # Convert to DataFrame
 df_anacostia = pd.DataFrame(data_anacostia)
 
-# Fetch data for ALL block groups in DC (first, get block group list dynamically)
-def get_dc_block_groups():
-    # Get all block groups in DC using Census API
-    # TODO()
-    return []
+# Fetch data for DC
+data_dc = get_ejscreen_data_city("Washington", "1150000")
 
-# Get all block groups in DC
-block_groups_dc = get_dc_block_groups()
-
-# Get EJScreen data for all block groups in DC
-data_dc = []
-for bg in block_groups_dc:
-    result = get_ejscreen_data(bg)
-    if result:
-        data_dc.append(result)
-    time.sleep(1)
-
-# Convert to DataFrame
-df_dc = pd.DataFrame(data_dc)
+# Convert to DataFrame (fix potential issue with dictionary)
+df_dc = pd.DataFrame([data_dc])
 
 # Display data
 print("EJScreen Data - Southeast Anacostia:")
