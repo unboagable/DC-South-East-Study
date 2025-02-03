@@ -72,10 +72,10 @@ def get_ejscreen_data_bg(area_id):
     }
     return get_ejscreen_data(params, area_id=area_id)
 
-# Get data for all block groups southeast of Anacostia
+# Fetch data for all block groups southeast of Anacostia
 data_anacostia = []
 for bg in block_groups_anacostia:
-    result = get_ejscreen_data_bg(bg)  # Fixed function call
+    result = get_ejscreen_data_bg(bg)
     if result:
         data_anacostia.append(result)
     time.sleep(1)  # Avoid overwhelming the API
@@ -86,7 +86,7 @@ df_anacostia = pd.DataFrame(data_anacostia)
 # Fetch data for DC
 data_dc = get_ejscreen_data_city("Washington", "1150000")
 
-# Convert to DataFrame (fix potential issue with dictionary)
+# Convert to DataFrame
 df_dc = pd.DataFrame([data_dc])
 
 # Display data
